@@ -1,0 +1,216 @@
+<!-- Navigation -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<body>
+<!--<script>
+    $("#feed").mouseover(function(){
+        $(".feedScroll").attr("class", "feedScroll feedScrollpause");
+    });
+    $("#feed").mouseleave(function(){
+        $(".feedScroll").attr("class", "feedScroll");
+    });
+</script>-->
+<script src="js/main.js"></script>
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand ">
+            <a href="#top" onclick=$("#menu-close").click();>
+                <div class="container ">
+                    <img class="logoHeight" src="img/musisUnity.png">
+                </div>
+            </a>
+        </li>
+        <li class="sizeIncSidebar moveSidebarElementsDown">
+            <a href="#top" onclick=$("#menu-close").click();  ng-click="model.logout()">Logout</a>
+        </li>
+        <li class="sizeIncSidebar">
+            <a href="#/user/{{model.userid}}/profile" onclick=$("#menu-close").click();>My Profile</a>
+        </li>
+        <li class="sizeIncSidebar">
+            <a href="#follow" onclick=$("#menu-close").click();>Feeds</a>
+        </li>
+
+        <li class="sizeIncSidebar">
+            <a href="#follow" onclick=$("#menu-close").click();>Discover Users</a>
+        </li>
+    </ul>
+</nav>
+
+
+<div class="intro-text">
+    <div class="team-member container">
+        <div class="container searchBarPadding">
+
+            <input id="searchtext" ng-model=model.searchText type="text"
+                   class="form-control searchbar"
+                   placeholder="Search universal!"/>
+            <br>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a id="search" class="btn btn-primary btn-block searchbarcolor"
+                       ng-click="model.search(model.searchText)">Search</a>
+                </div>
+                <div class="col-xs-6">
+                    <a id="clear" class="btn btn-primary btn-block searchbarcolor"
+                       ng-click="model.clear()">Clear</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 ">
+                <h3 class="whiteColor">Status Update</h3>
+            </div>
+            <div class="col-sm-6 whiteColor hidden-xs">
+                <h3> Music News</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-7">
+                    <textarea rows="2" id="statusBar" ng-model=model.updateTest
+                              class="form-control leftallign "
+                              placeholder="Update Status"></textarea>
+                    </div>
+                    <div class="col-xs-5 ">
+                        <a id="updateStatus" class="btn  btn-block searchbarcolor statusUpdateButton "
+                        ng-click="model.createMyComment(model.updateTest)">Update</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 whiteColor hidden-xs">
+                <h4> Twitter Feed</h4>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-sm-6 Content">
+                <div ng-repeat="status in model.FollowerStatus">
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-2 leftallign col-sm-2">
+                            <img class=" img-circle heightFollowImage " src={{status.url}}>
+                        </div>
+                        <div class="col-xs-10 col-sm-10">
+                            <p class="whiteColor text-justify size21px">
+                                <a href="" ng-click="model.followingProfile(status.username)">
+                                    <b class="blueColor">@{{status.username}}</b>
+                                </a> <i>says</i> {{status.status}}</p>
+                        </div>
+                    </div>
+
+                    <!-- <h5 class="whiteColor leftallign"><img class=" heightFollowImage" src="uploads/myFile-1480893251559.png">
+                         {{s.stauts}}</h5>-->
+                </div>
+            </div>
+            <div class="col-sm-6 whiteColor Content  hidden-xs "> 
+                <a class="twitter-timeline" href="https://twitter.com/vh1">Tweets by VH1</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-8 whiteColor  ">
+                        <h3>User</h3>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 whiteColor">
+                        <h3>Follow</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 whiteColor hidden-xs">
+                <h3>Feeds</h3>
+            </div>
+        </div>
+<section id="follow" class="nopadding">
+        <!--User Follow Pane-->
+        <div class="row ">
+            <div class="col-sm-6 Content ">
+                <div ng-repeat="user in model.allUser" ng-switch="user.following">
+                    <div class="row ">
+                        <div class="col-xs-8">
+                            <ul class="list-inline leftallign">
+                                <li>
+                                    <!-- src here should be user.url-->
+                                    <img class=" img-circle heightFollowImage" src={{user.user.url}}>
+                                </li>
+                                <li>
+                                    <a href="" ng-click="model.followingProfile(user.user.username)">
+
+                                    <h4 class="blueColor ">{{user.user.username}}</h4></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-4">
+                            <div ng-switch-when="false">
+                                <h5 id="follow{{$index}}" class=" followIconHeight">
+                                    <a href="" class=" whiteColor" ng-click="model.followUser(user,$index)">
+                                        <button class="btn-success" style="border-radius: 12px">
+                                            <i class="fa fa-plus statusUpdateButton" aria-hidden="true"></i>Follow
+                                        </button>
+                                    </a>
+                                </h5>
+                                <h5 id="unfollow1{{$index}}" class="followIconHeight hide">
+                                    <a href="" class="whiteColor" ng-click="model.unfollowUser(user,$index)" >
+                                        <button class="" style="border-radius: 12px; background-color: #00A4E4;" >
+                                            <i class="fa fa-check statusUpdateButton" aria-hidden="true"></i>Following
+                                        </button>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div ng-switch-when="true">
+                                <h5 id="unfollow{{$index}}" class="followIconHeight">
+                                    <a href="" class="whiteColor" ng-click="model.unfollowUser(user,$index)" >
+                                        <button class="unfollow" >
+                                            <i class="fa fa-check statusUpdateButton" aria-hidden="true"></i>Following
+                                        </button>
+                                    </a>
+                                </h5>
+                                <h5 id="follow1{{$index}}" class=" followIconHeight hide">
+                                    <a href="" class=" whiteColor" ng-click="model.followUser(user,$index)">
+                                        <button class="btn-success" style="border-radius: 12px">
+                                            <i class="fa fa-plus statusUpdateButton" aria-hidden="true"></i>Follow
+                                        </button>
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="visible-xs whiteColor">Feeds</h3>
+
+            <!-- Feeds-->
+
+            <div class="col-sm-6 Content">
+                <div ng-repeat="song in model.FollowerrecentSong">
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-2 leftallign col-sm-2">
+                            <!-- this should be the url of the profile image-->
+                            <img class=" img-circle heightFollowImage " src="{{song.song.url}}">
+                        </div>
+                        <div class="col-xs-10 col-sm-10">
+                            <p class="whiteColor text-justify size21px">
+                                <a href=""  ng-click="model.followingProfile(song.username)"><b class="blueColor">@{{song.username}}</b></a>
+                                <i>listened to</i> {{song.song.title}}</p>
+                        </div>
+                    </div>
+
+                    <!-- <h5 class="whiteColor leftallign"><img class=" heightFollowImage" src="uploads/myFile-1480893251559.png">
+                         {{s.stauts}}</h5>-->
+                </div>
+            </div>
+
+            <br>
+            <!-- Status-->
+
+        </div>
+    </div>
+    </section>
+</body>
+
+
+<!-- Custom Theme JavaScript -->
+
+

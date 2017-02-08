@@ -1,0 +1,501 @@
+<!-- Navigation -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<script src="js/main.js"></script>
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand ">
+            <a href="#top" onclick=$("#menu-close").click();>
+                <div class="container ">
+                    <img class="logoHeight" src="img/musisUnity.png">
+                </div>
+            </a>
+        </li>
+        <li class="sizeIncSidebar moveSidebarElementsDown">
+            <a href="#" onclick=$("#menu-close").click(); ng-click="model.logout()">Logout</a>
+        </li>
+        <li class="sizeIncSidebar">
+            <a href="#/user/{{model._id}}/home2" onclick=$("#menu-close").click(); >Search Music</a>
+        </li>
+        <li class="sizeIncSidebar">
+            <a href="#portfolio" onclick=$("#menu-close").click();>Recents</a>
+        </li>
+
+        <li class="sizeIncSidebar">
+            <a href="#Playlists" onclick=$("#menu-close").click();>My Media</a>
+        </li>
+    </ul>
+</nav>
+
+
+<div class="intro-text  backgroundgrey ">
+    <div class="team-member coverImage ">
+        <br>
+        <img src="{{model.user.url}}" class="img-responsive img-circle team-member-sizeAdjust" alt="">
+        <h4 class="displayName">{{model.user.firstName}}</h4>
+        <br>
+        <ul class="list-inline social-buttons padding10px">
+            <li><a href="http://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li><a href="http://facebook.com"target="_blank"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+                <a id='updateProfile' href="javascript:void(0)" data-toggle="modal"
+                   onclick="openLoginModal();"><i class=" abc fa fa-pencil" aria-hidden="true"></i></a>
+                <div class="modal fade login" id="loginModal">
+                    <div class="modal-dialog login animated">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Update Profile</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="box">
+                                    <div class="content">
+                                        <div class=" alert alert-info ">
+                                            <strong>Info!</strong> Select the picture and Click Uplaod Picture to change
+                                            DP or simply add URL :)
+                                        </div>
+                                        <div class="error">{{model.errorLogin}}</div>
+                                        <div class="form loginBox">
+                                            <form>
+                                                <input id="usernameRegister" ng-model="model.user.username"
+                                                       class="form-control" type="text" placeholder="Username"
+                                                       name="email" disabled="true">
+                                                <input id="emailRegister" ng-model="model.user.email"
+                                                       class="form-control" type="text" placeholder="Email"
+                                                       name="email">
+                                                <input id="firstName" ng-model="model.user.firstName"
+                                                       class="form-control" type="text" placeholder="FirstName"
+                                                       name="email">
+                                                <input id="lastName" ng-model="model.user.lastName" class="form-control"
+                                                       type="text" placeholder="LastName" name="email">
+                                                <input id="passwordRegister" ng-model="model.user.passowrd"
+                                                       class="form-control" type="password" placeholder="Password"
+                                                       name="password">
+                                                <input id="password_confirmation" ng-model="model.user.verifyPassword"
+                                                       class="form-control" type="password" placeholder="New Password"
+                                                       name="password_confirmation">
+                                                <input id="url" ng-model="model.user.url" class="form-control"
+                                                       type="text" placeholder="URL" name="URL">
+                                            </form>
+                                            <form action="/api/upload" method="post" enctype="multipart/form-data">
+                                                <input name="myFile" type="file" class="incSize form-control"/>
+
+                                                <input name="userId" value="{{model._id}}" style="display: none"/>
+                                                <button type="submit" class="btn btn-block btn-primary"
+                                                        style="height: 49px;">Upload Image
+                                                </button>
+
+
+                                            </form>
+
+                                            <input class="btn btn-default btn-login" type="button" value="Update"
+                                                   ng-click="model.updateUser(model.user)">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <div class="forgot login-footer">
+
+                                </div>
+                                <div class="forgot register-footer" style="display:none">
+                                    <span>Already have an account?</span>
+                                    <a href="javascript: showLoginForm();">Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </li>
+        </ul>
+
+
+        <header>
+            <ul class="list-inline">
+                <li>
+                    <a class="btn big-login page-scroll" href="#portfolio">Recent</a>
+
+
+                </li>
+                <li>
+                    <a class="btn big-register page-scroll" href="#Playlists">Playlists</a>
+
+                </li>
+                <li>
+                    <a id="home2Redirect" class="btn big-register" href="#/user/{{model._id}}/home2">Discover Music</a>
+
+                </li>
+            </ul>
+            <br>
+        </header>
+
+    </div>
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+
+    <!-- Recent Played -->
+    <section id="portfolio" class="portfolio  container ">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2 class="center whiteColor">Recently Played</h2>
+            </div>
+            <div class="col-sm-6">
+                <p class="pull-right whiteColor hidden-xs btn-success peopleIfillow size40px center borderRound">People I follow</p>
+            </div>
+        </div>
+        <div class="row container">
+            <div class="col-sm-6 Content ">
+                <div ng-repeat="song in model.recentSongs">
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-3 leftallign col-sm-2">
+                            <!-- this should be the url of the profile image-->
+                            <img class=" img-circle heightFollowImage " src="{{song.url}}">
+                        </div>
+                        <div class="col-xs-9 col-sm-10">
+                            <p class="whiteColor text-justify size21px">{{song.title}}</p>
+                        </div>
+                    </div>
+
+                    <!-- <h5 class="whiteColor leftallign"><img class=" heightFollowImage" src="uploads/myFile-1480893251559.png">
+                         {{s.stauts}}</h5>-->
+                </div>
+            </div>
+
+            <h3 id="PIF"class="center whiteColor visible-xs">People I follow</h3>
+
+               <img id="lock" class="center pull-right hidden-xs lock hide " src="https://lh6.ggpht.com/QJmD8kfdOz3CPMpRlNVVOiGhkLCgOUV-9wV3RcjGka5LWZS6JPvPEpKqMtP9j_3hQPs=w300">
+
+
+
+            <div id='peopleIFollow' class="col-sm-6  Content ">
+                <div ng-repeat="user in model.following">
+                    <br>
+                    <div class="row ">
+                        <div class="col-xs-5 hidden-xs">
+
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="row">
+                                    <div class="col-xs-5 col-sm-4">
+                                        <img class=" img-circle heightFollowImageBig " src={{user.url}}>
+                                    </div>
+                                <div class="col-xs-7 col-sm-8">
+                                    <a href="" ng-click="model.followingProfile(user.username)">
+                                    <p class="whiteColor size21px blueColor">@{{user.username}}</p>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <!--<ul class="list-inline ">-->
+                            <!--<li>-->
+                            <!--&lt;!&ndash; src here should be user.url&ndash;&gt;-->
+                            <!--<img class=" img-circle heightFollowImageBig " src={{user.url}}>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<p class="whiteColor size21px blueColor">@{{user.username}}</p>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <section id="Playlists" class="portfolio">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2 class="center whiteColor">My PlayLists</h2>
+                </div>
+                <div class="col-sm-6">
+                    <h2 class="center whiteColor hidden-xs">Songs I Like</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row" ng-repeat="playObj in model.playlist">
+                        <div class="col-xs-6">
+                            <div>
+                                <p class="whiteColor">
+                                    <div ng-if="!model.guest" ng-click="model.replaceQwithPls(playObj._id)">
+                                        <i class="fa fa-play blueColor color " aria-hidden="true"></i>
+                                        <i class="size40px whiteColor">{{playObj.name}}</i>
+                                    </div>
+                                    <div ng-if="playObj.private && model.guest">
+                                        <i class="fa fa-lock blueColor color " aria-hidden="true"></i>
+                                        <i class="size40px whiteColor">{{playObj.name}}</i>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xs-6" ng-if="!playObj.private|| !model.guest">
+                            <a href="" ng-cick="model.deletePlayList(playObj._id)">
+                                <h4 class="whiteColor pull-right">
+
+                                    <i style="margin-top: -19px" class="fa fa-close color "></i>
+
+
+                                </h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="center whiteColor visible-xs">Songs I like</h3>
+                <div class="col-sm-6 Content ">
+
+                    <div ng-repeat="like in model.likes">
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-2  col-sm-2 hidden-xs">
+                                <!--<h3>  <i class="fa fa-heart-o redColor" aria-hidden="true"></i></h3>-->
+                            </div>
+                            <div class="col-xs-10 col-sm-10">
+                                <p class="whiteColor text-justify size21px">
+                                    <i class="fa fa-star redColor " aria-hidden="true"></i> {{like.song}}</p>
+                            </div>
+                        </div>
+
+                        <!-- <h5 class="whiteColor leftallign"><img class=" heightFollowImage" src="uploads/myFile-1480893251559.png">
+                             {{s.stauts}}</h5>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <!--start  <div class="container">
+          <div class="row ">
+              <div class="col-sm-6 Content  ">
+                  <h3 class="allgntoCenter">Recently Played</h3>
+                  <div class="row">
+                      <div class="col-xs-12">
+                          <div class="container list-group ">
+                              <div class="list-group-item " ng-repeat="song in model.recentSongs">
+                                  <div class="list-group active">
+                                      <a href="#" class="list-group-item  ">
+                                          <h5 class="list-group-item-heading">
+                                              <ul class="list-inline">
+                                                  <li>
+                                                      <img class="media-object thumbnailSize" src={{song.url}}
+                                                           alt="...">
+                                                  </li>
+
+                                                  <li>
+                                                      <h5>{{song.title}}</h5>
+                                                      <!-- <marquee behavior="scroll" direction="left"> <h4 id = "currentTrack">{{song.title}}</h4></marquee>-->
+
+    <!--   </li>
+
+   </ul>
+</h5>
+
+<p class="list-group-item-text">
+<ul class="list-inline">
+   <li><i class="fa fa-share-alt" aria-hidden="true"></i></li>
+
+   <li>
+       Sharable Link
+   </li>
+</ul>
+</p>
+</a>
+</div>
+</div>
+</div>
+</div> end-->
+    <!--   <div class="col-xs-3">
+           <ul class="list-inline ">
+               <li>
+                   <h1> <i id="play"  class="fa fa-play" aria-hidden="true"></i></h1>
+               </li>
+               <li>
+                   <h1> <i id="addtoQueue"  class="fa fa-plus" aria-hidden="true"></i></h1>
+               </li>
+               <li>
+                   <h1> <i id="delete"  class="fa fa-trash" aria-hidden="true"></i></h1>
+               </li>
+           </ul>
+
+
+
+       </div>-->
+    <!-- </div>-->
+
+    <!--</div>
+    <div class="col-sm-6  Content backgroundRecents">
+
+        <h3 class="allgntoCenter">My Followings</h3>
+        <div class="container">
+
+            <div ng-repeat="user in model.following" class="container-fluid">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        <h4 class="list-group-item-heading">{{user.firstName}}</h4>
+                        <p class="list-group-item-text">2.{{user.lastName}}</p>
+                        <p class="list-group-item-text">3.{{user.username}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+&lt;!&ndash; /.row &ndash;&gt;
+</div>
+&lt;!&ndash; /.container &ndash;&gt;
+</section>-->
+
+
+    <!--&lt;!&ndash; Team Section &ndash;&gt;-->
+    <!--<section id="Playlists1" class="bg-light-gray">-->
+    <!--<div class="container">-->
+    <!--<div class="row">-->
+    <!--<div class="col-sm-6 text-center">-->
+    <!--<h3 class="allgntoCenter">My PlayLists</h3>-->
+    <!--<div class="row">-->
+    <!--<div class="col-xs-9">-->
+    <!--<div class="container ">-->
+    <!--<div ng-repeat="playObj in model.playlist">-->
+    <!--<div class="list-group active">-->
+    <!--<a href="#" class="list-group-item active">-->
+    <!--<h5 class="list-group-item-heading">-->
+    <!--<ul class="list-inline">-->
+    <!--<li>-->
+    <!--<h5 id="Playlist">{{playObj.name}}</h5>-->
+    <!--&lt;!&ndash;roop start&ndash;&gt;-->
+    <!--<a href=""-->
+    <!--ng-click="model.deletePlayList(playObj._id)">-->
+    <!--delete ME-->
+    <!--</a>-->
+    <!--&lt;!&ndash;roop end&ndash;&gt;-->
+    <!--</li>-->
+
+    <!--</ul>-->
+    <!--&lt;!&ndash;roop start&ndash;&gt;-->
+    <!--<a href=""-->
+    <!--ng-click="model.replaceQwithPls(playObj._id)">-->
+    <!--play ME-->
+    <!--</a>-->
+    <!--&lt;!&ndash;roop end&ndash;&gt;-->
+    <!--</h5>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash;  <h3 class="allgntoCenter">My PlayLists</h3>-->
+    <!--<div ng-repeat="playObj in model.playlist" class="container-fluid">-->
+    <!--<div class="list-group">-->
+    <!--<a href="#" class="list-group-item active">-->
+    <!--<h4 class="list-group-item-heading">{{playObj}}</h4>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</div>&ndash;&gt;-->
+
+    <!--</div>-->
+
+    <!--<div class="col-sm-6 Content bg-light-gray backgroundRecents">-->
+    <!--<h3 class="allgntoCenter">My Jams</h3>-->
+    <!--<div class="row">-->
+    <!--<div class="col-xs-9">-->
+    <!--<div class="container ">-->
+    <!--<div ng-repeat="like in model.likes">-->
+    <!--<div class="list-group active">-->
+    <!--<a href="#" class="list-group-item active">-->
+    <!--<h5 class="list-group-item-heading">-->
+    <!--<ul class="list-inline">-->
+    <!--<li>-->
+    <!--<img class="media-object thumbnailSize" src={{like.url}}-->
+    <!--alt="...">-->
+    <!--</li>-->
+
+    <!--<li>-->
+    <!--<h5 id="likedTrack">{{like.song}}</h5>-->
+
+    <!--</li>-->
+
+    <!--</ul>-->
+    <!--</h5>-->
+
+    <!--<p class="list-group-item-text">Sharable Link</p>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+
+    <!--</section>-->
+    <!--</div>-->
+
+
+    <!--&lt;!&ndash; Call to Action &ndash;&gt;-->
+    <!--&lt;!&ndash;<aside class="call-to-action bg-primary">-->
+    <!--<div class="container">-->
+    <!--<div class="row">-->
+    <!--<div class="col-lg-12 text-center">-->
+    <!--<h3>The buttons below are impossible to resist.</h3>-->
+    <!--<a href="#" class="btn btn-lg btn-light">Click Me!</a>-->
+    <!--<a href="#" class="btn btn-lg btn-dark">Look at Me!</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</aside>&ndash;&gt;-->
+
+    <!--&lt;!&ndash; Map &ndash;&gt;-->
+    <!--&lt;!&ndash;<section id="contact" class="map">-->
+    <!--<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>-->
+    <!--<br />-->
+    <!--<small>-->
+    <!--<a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>-->
+    <!--</small>-->
+    <!--</iframe>-->
+    <!--</section>-->
+
+    <!--&lt;!&ndash; Footer &ndash;&gt;-->
+    <!--&lt;!&ndash;<footer>-->
+    <!--<div class="container">-->
+    <!--<div class="row">-->
+    <!--<div class="col-lg-10 col-lg-offset-1 text-center">-->
+    <!--<h4><strong>Start Bootstrap</strong>-->
+    <!--</h4>-->
+    <!--<p>3481 Melrose Place-->
+    <!--<br>Beverly Hills, CA 90210</p>-->
+    <!--<ul class="list-unstyled">-->
+    <!--<li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>-->
+    <!--<li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--<br>-->
+    <!--<ul class="list-inline">-->
+    <!--<li>-->
+    <!--<a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--<hr class="small">-->
+    <!--<p class="text-muted">Copyright &copy; Your Website 2014</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>-->
+    <!--</footer>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash; Custom Theme JavaScript &ndash;&gt;-->
+

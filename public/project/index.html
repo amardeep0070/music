@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MusicUnity" style="overflow-x: hidden">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <!--  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>-->
+  <!--<script src="js/angular.min.js"></script>-->
+  <!-- jQuery -->
+  <script src="js/jquery.js"></script>
+  <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/clipboard.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+<!--  <script src="js/bootstrap.js"></script>-->
+  <script src="app.js"></script>
+  <script src="config.js"></script>
+  <script src = "directives/utility.js"></script>
+  <script src = "js/YT.js"></script>
+  <script src = "js/notify.js"></script>
+  <script src="client.services/user.service.client.js"></script>
+  <script src="views/landingPage/mainPage.controller.client.js"></script>
+  <script src="views/home2/home2.controller.client.js"></script>
+  <script src="views/home1/home1.controller.client.js"></script>
+  <script src="client.services/youtubeService.service.client.js"></script>
+  <script src="client.services/dailymotionService.service.client.js"></script>
+  <script src="client.services/user.service.client.js"></script>
+  <script src="client.services/comment.service.client.js"></script>
+  <script src="client.services/like.service.client.js"></script>
+  <script src="client.services/playlist.service.client.js"></script>
+  <script src="js/login-register.js"></script>
+  <script src="views/profile/profile.controller.client.js"></script>
+  <script src="js/main.js"></script>
+
+  <!--DM Related-->
+  <!---->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Music Unity</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/stylish-portfolio.css" rel="stylesheet">
+  <link href="css/localStyle.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+
+<body class="backgroundgrey">
+<div id = "backButtonParentDiv" class="backBox rotate pull-left hidden-xs hidden-sm">
+  <div id="backButtonDiv">
+    <i id = "backButton" onclick="goBack()" class="fa fa-arrow-left" aria-hidden="true"></i>
+  </div>
+  <div id="parent">
+    <div id="youtube"></div>
+    <div id="dailymotion"style="visibility: hidden;"></div> <!--hidden as dialymotion detects display none and unloads video-->
+  </div>
+  </div>
+<div ng-view>
+</div>
+</body>
+
+</html>
+<script src="https://api.dmcdn.net/all.js"></script>
+<script src="js/DM.js"></script>
+<script src="http://www.youtube.com/player_api"></script>
+<script>
+  console.log(window.location.pathname);
+</script>

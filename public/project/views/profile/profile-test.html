@@ -1,0 +1,151 @@
+<body>
+<div class="coverImage">
+<div class=" container  ">
+    <script src="js/main.js"></script>
+    <script>
+        var clipboard = new Clipboard('.abc');
+        clipboard.on('success', function(e) {
+            //console.log(e);
+        });
+        clipboard.on('error', function(e) {
+           // console.log(e);
+        });
+    </script>
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top" onclick=$("#menu-close").click();>Music Unity</a>
+            </li>
+            <li>
+                <a href="#top" onclick=$("#menu-close").click();>Home</a>
+            </li>
+            <li>
+                <a href="#about" onclick=$("#menu-close").click();>Whats Music Unity</a>
+            </li>
+            <li>
+                <a href="#services" onclick=$("#menu-close").click();>Services</a>
+            </li>
+            <li>
+                <a href="#portfolio" onclick=$("#menu-close").click();>Sign in/Sign Up</a>
+            </li>
+            <li>
+                <a href="#team" onclick=$("#menu-close").click();>Our Awesome Team</a>
+            </li>
+        </ul>
+    </nav>
+
+<div class="team-member  ">
+    <img src="img/1.png" class="img-responsive img-circle" alt="">
+    <h4>Amardeep Singh</h4>
+    <br>
+    <ul class="list-inline social-buttons ">
+        <li><a href="#"><i class="fa fa-twitter"></i></a>
+        </li>
+        <li><a href="#"><i class="fa fa-facebook"></i></a>
+        </li>
+        <li>
+            <a href=""><i class=" abc fa fa-pencil" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Update Profile</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text "
+                                   ng-model="model.user.name"
+                                   class="form-control incSize "
+                                   placeholder="Name"/>
+                            <br>
+                            <input type="email "
+                                   ng-model="model.user.username"
+                                   class="form-control incSize "
+                                   placeholder="Email"/>
+                            <br>
+                            <input type="password "
+                                   ng-model="model.user.currentPassword"
+                                   class="form-control incSize "
+                                   placeholder="Current Passowrd"/>
+                            <br>
+                            <input type="password "
+                                   ng-model="model.user.newPassword"
+                                   class="form-control incSize "
+                                   placeholder="New Password"/>
+                            <br>
+                            <form  action="/api/upload"  method="post" enctype="multipart/form-data">
+                                <input  name="myFile"   type="file" class="incSize form-control"/>
+                                <input  name="width"    value="{{model.widget.width}}" style="display: none"/>
+                                <input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>
+                                <!--<button type="submit"   class="btn btn-block btn-primary">Upload Image</button>-->
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal"
+                                    data-clipboard-action="copy" data-clipboard-target='#text-{{$index}}'>Update</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+<div class="row ">
+    <div class="col-sm-6">
+        <div class="container">
+        <h3>Recently Played</h3>
+        </div>
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+        <h4 class="list-group-item-heading">Song Name</h4>
+        <p class="list-group-item-text">Service Name</p>
+        <p class="list-group-item-text">Sharable Link</p>
+    </a>
+    <br>
+    <a href="#" class="list-group-item active">
+        <h4 class="list-group-item-heading">Song Name1</h4>
+        <p class="list-group-item-text">Service Name</p>
+        <p class="list-group-item-text">Sharable Link</p>
+    </a>
+    <br>
+    <a href="#" class="list-group-item active">
+        <h4 class="list-group-item-heading">Song Name1</h4>
+        <p class="list-group-item-text">Service Name</p>
+        <p class="list-group-item-text">Sharable Link</p>
+    </a>
+</div>
+    </div>
+    <div class="col-sm-6">
+        <div class="container">
+            <h3>Saved PlayLists</h3>
+        </div>
+        <div class="list-group">
+            <a href="#" class="list-group-item active">
+                <h4 class="list-group-item-heading">Song Name</h4>
+                <p class="list-group-item-text">Service Name</p>
+                <p class="list-group-item-text">Sharable Link</p>
+            </a>
+            <br>
+            <a href="#" class="list-group-item active">
+                <h4 class="list-group-item-heading">Song Name1</h4>
+                <p class="list-group-item-text">Service Name</p>
+                <p class="list-group-item-text">Sharable Link</p>
+            </a>
+            <br>
+            <a href="#" class="list-group-item active">
+                <h4 class="list-group-item-heading">Song Name1</h4>
+                <p class="list-group-item-text">Service Name</p>
+                <p class="list-group-item-text">Sharable Link</p>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</body>

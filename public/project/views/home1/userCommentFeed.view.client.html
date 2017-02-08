@@ -1,0 +1,10 @@
+<div>
+    <h1>MY FOLLOWERS COMMENTS</h1>
+    <div ng-repeat = "comments in model.FollowerComments" class="container-fluid" >
+        <div ng-repeat = "item in comments.comment" class="container-fluid" >
+            <h1>{{comments.name}}</h1>
+            <h4>{{item.comment}}</h4>
+            <br>
+        </div>
+    </div>
+</div>

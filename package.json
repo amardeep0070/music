@@ -1,0 +1,39 @@
+{
+  "name": "web-dev",
+  "version": "1.0.0",
+  "description": "Web Dev at Northeastern University",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "mime": "^1.3.4",
+    "mongoose": "^4.4.15",
+    "multer": "^1.2.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-github2": "^0.1.10",
+    "passport-google-oauth": "^1.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Jose G. Annunziato",
+  "license": "ISC",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoopGhosh/ghosh-roop-web-dev.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RoopGhosh/ghosh-roop-web-dev/issues"
+  },
+  "homepage": "https://github.com/RoopGhosh/ghosh-roop-web-dev#readme"
+}

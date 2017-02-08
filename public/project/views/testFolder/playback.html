@@ -1,0 +1,79 @@
+
+<script src="../../js/jquery.js"></script>
+
+<script src="https://api.dmcdn.net/all.js"></script>
+<div id="dailymotion"></div>
+
+<button onclick="clickme()">nextSong</button>
+<button onclick="playPause()">play/pause</button>
+
+<textarea id = "haha"></textarea>
+<button onclick="search()">search</button>
+
+<div id = "ha">
+
+</div>
+
+<script>
+
+    var videoArray=[];
+    videoArray.push("x3fzlp9");
+    videoArray.push("x54fw5y");
+    videoArray.push("x3d9s44");
+    videoArray.push("x3eoon7");
+
+    var dailymotion = DM.player(document.getElementById("dailymotion"), {
+        video: "xwr14q",
+        width: "640",
+        height: "500",
+        params: {
+            autoplay: true
+        }
+    });
+    dailymotion.addEventListener('video_end', function(event) {
+        dailymotion = DM.player(document.getElementById("dailymotion"), {
+            video: videoArray[1],
+            width: "640",
+            height: "500",
+            params: {
+                autoplay: true
+            }
+        });
+    });
+var count =-1
+    function clickme() {
+        count++;
+        dailymotion.load(videoArray[count], {
+            autoplay: true,
+            params: {
+                autoplay: true
+            }
+        });
+    }
+
+    var pause= false;
+    function playPause() {
+        if(pause)
+            dailymotion.play();
+        else
+            dailymotion.pause();
+        pause = !pause;
+    }
+
+
+    function search() {
+        var text = $('#haha').val();
+        var handleAPIResponse = function(response) {
+            console.log("hello from DM");
+            console.log(response);
+            document.getElementById("ha").innerHTML = response.list;
+        };
+
+        console.log("read this from text box"+text);
+        DM.api('/videos', {
+            search:text ,
+            fields: 'title'
+        }, handleAPIResponse);
+    }
+
+</script>
