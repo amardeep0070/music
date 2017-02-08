@@ -11,6 +11,7 @@ app.use(express.static(__dirname + '/public'));
 //require ("./test/app.js")(app);
 
 require ("./app")(app);
+//Openshift configrations.
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 5000;
 
