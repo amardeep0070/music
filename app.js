@@ -1,3 +1,4 @@
+//loading service services.
 module.exports = function (app) {
     var model =  require("./server_side/models/models.server")();
     require("./server_side/services/user.service.server")(app,model);
